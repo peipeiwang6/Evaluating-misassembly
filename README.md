@@ -42,17 +42,24 @@ Factors influencing and machine learning models predicting read coverage in a ge
 > ## Step 03: save the read depth (RD) in each bin region to a file
 
  - awk '{print $2}END{print "exit"}' Sly.cnv | cnvnator -root Sly.root -genotype bin_size > out_put
-
-> ## Step 04: HC/LC designation filtering
-
-Adjust p-values (q-value), then filter HC/LC regions based on q-value and q0 value. Before that, q-value threshold was determined by evaluating the consistency between results using original reads and resampled reads. Reads were resampled based on simulated RDs: i) the only possible RD values were 0 (LC), 1 (BG), or 2 (HC) regions; ii) the analysisoriginal RD values were discretized (rounded) to their closest integers; iii) the analysis RD were used; iiii) the analysis RD but resampled at 30-fold coverage.
-
- - R --vanilla --slave --args input_file output_file < 04_01_pvalue_adjustment.r  ### Note that the input_file is the Sly.cnv resulted from CNVnator
  
- - python 04_02_resample_reads_based_on_different_strategies Sly.cnv Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa strategies_to_resample_read   ### Note that strategies_to_resample_read can be one of "012", "rounded", "analysis"
- 
- - python 04_03_resample_reads_with_different_coverages.py 
+> ## Step 04: resample reads based on different strategies
 
+Reads were resampled based on simulated RDs: i) the only possible RD values were 0 (LC), 1 (BG), or 2 (HC) regions; ii) the analysisoriginal RD values were discretized (rounded) to their closest integers; iii) the analysis RD were used; iiii) the analysis RD but resampled at X-fold coverage.
+
+- python 04_01_resample_reads_based_on_different_strategies.py Sly.cnv Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa strategies_to_resample_read   ### Note that strategies_to_resample_read can be one of "012", "rounded", "analysis"
+
+- python 04_02_resample_reads_with_different_coverages.py read_file number 
+
+> ## Step 05: HC/LC designation filtering
+
+Adjust p-values (q-value), then filter HC/LC regions based on q-value and q0 value. Before that, q-value threshold was determined by evaluating the consistency between results using original reads and resampled reads. 
+
+ - R --vanilla --slave --args input_file output_file < 05_01_pvalue_adjustment.r  ### Note that the input_file is the Sly.cnv resulted from CNVnator
+ 
+ - python 05_02_compare_two_CNVnator_calling.py
+ 
+ - python 05_03_draw_F1_at_different_qvalues.py
 
 
 > ## Step 06: Determine HC/LC/BG regions with high confidence
@@ -71,6 +78,12 @@ To assess the extent to which read coverage impacts the RD determination, reads 
 
 > ## Step 09: Get the features to build the machine learning models
 ** GC content **
+
+** Density of genes **
+
+** K-mer **
+
+** Tandem repeats, or Simple sequence repeat **
 
 
 > ## Step 10: Build prediction models using Random Forest
