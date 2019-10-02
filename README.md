@@ -57,10 +57,9 @@ Adjust p-values (q-value), then filter HC/LC regions based on q-value and q0 val
 
  - R --vanilla --slave --args input_file output_file < 05_01_pvalue_adjustment.r  ### Note that the input_file is the Sly.cnv resulted from CNVnator
  
- - python 05_02_compare_two_CNVnator_calling.py
+ - python 05_02_compare_two_CNVnator_calling.py original_HC/LC/BG_calling simulated_HC/LC/BG_calling
  
- - python 05_03_draw_F1_at_different_qvalues.py
-
+ - python 05_03_draw_F1_at_different_qvalues.py 
 
 > ## Step 06: Determine HC/LC/BG regions with high confidence
 
