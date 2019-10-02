@@ -49,9 +49,9 @@ Adjust p-values (q-value), then filter HC/LC regions based on q-value and q0 val
 
  - R --vanilla --slave --args input_file output_file < 04_01_pvalue_adjustment.r  ### Note that the input_file is the Sly.cnv resulted from CNVnator
  
- - python 04_02_Sly_simulation_discretized_to_0_1_2.py Sly.cnv Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa strategies_to_resample_read   ### Note that strategies_to_resample_read can be one of "012", "rounded", "analysis"
+ - python 04_02_resample_reads_based_on_different_strategies Sly.cnv Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa strategies_to_resample_read   ### Note that strategies_to_resample_read can be one of "012", "rounded", "analysis"
  
- 
+ - python 04_03_resample_reads_with_different_coverages.py 
 
 
 
