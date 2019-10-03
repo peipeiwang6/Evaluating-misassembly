@@ -1,6 +1,6 @@
 # Evaluating-misassembly
 
-teaser: "<sup>e<sub>: joint first/corresponding. <sup>u<sub>:undergrad. <sup>h<sub>:high school student. <sup>v<sub>:visiting scholar. Bold: people from the Shiu lab."
+<sup>e: joint first/corresponding. <sup>u:undergrad. <sup>h:high school student. <sup>v:visiting scholar. Bold: people from the Shiu lab."
 
 Factors influencing and machine learning models predicting read coverage in a genome assembled using short reads 
 
