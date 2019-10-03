@@ -95,9 +95,11 @@ tandem_file proximal_file
  
 **Tandem repeats, or Simple sequence repeat**
 
- - trf yoursequence.txt 2 7 7 80 10 50 500 -f -d -m  # software tandem repeat finder can be found here: [click here](https://tandem.bu.edu/trf/trf.html)
+ - trf your_genome_sequence_file 2 7 7 80 10 50 500 -f -d -m  # software tandem repeat finder can be found here: [click here](https://tandem.bu.edu/trf/trf.html)
  
- - python 09_04_parse_each_tandem_repeat_as_features.py CNV_file SSR_file genome_file output
+ - python 09_04_get_tandem_repeats_info_from_trf_results.py path_to_html_files
+ 
+ - python 09_05_parsh_tandem_repeats_to_features.py genome_file CNV_file SSR_file
 
 > ## Step 10: Build prediction models using Random Forest
 
