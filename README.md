@@ -131,7 +131,13 @@ To evaluate the properties of genes located in HC regions, first the number of e
 
  - python 15_01_randomly_sample_HC_in_BG.py HC_file BG_file chromosome_length path
  
- - R --vanilla --slave --args observed_HC path_to_random_HC tandem_file proximal_file sm_file output_file < 15_03_count_genes_in_observed_random_HC.r
+ - python 15_02_find_genes_within_HC.py HC_file gff_file genome_file output
+ 
+ - python 15_03_find_pseudogenes_within_HC.py HC_file pseudogene_gff_file genome_file output
+ 
+ - python 15_04_find_repeats_within_HC.py HC_file repeat_gff_file repeat_gff_file_2 genome_file dir_chromo output
+ 
+ - R --vanilla --slave --args observed_HC path_to_random_HC tandem_file proximal_file sm_file output_file < 15_05_count_genes_in_observed_random_HC.r
 
 > ## Step 16: Gene set enrichment analysis (Fisher’s exact test)
  
