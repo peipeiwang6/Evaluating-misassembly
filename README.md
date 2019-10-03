@@ -129,7 +129,9 @@ To assess how the observed correlation between densities of HC/LC/BG regions wit
 
 To evaluate the properties of genes located in HC regions, first the number of each type of gene overlapping with HC regions were determined. Next, regions with same number and length of HC regions were randomly selected from BG regions, which was repeat 10,000 times. The observed numbers of genes were compared with the random null distribution to see which type of gene is over- or under-representative.
 
-
+ - python 15_01_randomly_sample_HC_in_BG.py HC_file BG_file chromosome_length path
+ 
+ - R --vanilla --slave --args observed_HC path_to_random_HC tandem_file proximal_file sm_file output_file < 15_03_count_genes_in_observed_random_HC.r
 
 > ## Step 16: Gene set enrichment analysis (Fisher’s exact test)
  
