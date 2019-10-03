@@ -1,5 +1,9 @@
 # Evaluating-misassembly
-<sup>e</sub>: joint first/corresponding. <sup>u</sub>:undergrad. <sup>h</sub>:high school student. <sup>v</sub>:visiting scholar. Bold: people from the Shiu lab
+Testing <sub>subscript</sub> and <sup>superscript</sup>
+
+Testing <sub>subscript <sub>subscript level 2</sub></sub>
+
+Testing <sup>superscript <sup>superscript level 2</sup></sup>
 Factors influencing and machine learning models predicting read coverage in a genome assembled using short reads 
 
 > ## Step 01: Map genome sequencing reads to tomato genome.
