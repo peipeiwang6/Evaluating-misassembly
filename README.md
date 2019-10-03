@@ -1,5 +1,5 @@
 # Evaluating-misassembly
-Factors influencing and machine learning models predicting read coverage in a genome assembled using short reads
+Factors influencing and machine learning models predicting read coverage in a genome assembled using short reads <sup>‡<sub>
 
 > ## Step 01: Map genome sequencing reads to tomato genome.
 
