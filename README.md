@@ -1,9 +1,5 @@
 # Evaluating-misassembly
-Testing <sub>subscript</sub> and <sup>superscript</sup>
 
-Testing <sub>subscript <sub>subscript level 2</sub></sub>
-
-Testing <sup>superscript <sup>superscript level 2</sup></sup>
 Factors influencing and machine learning models predicting read coverage in a genome assembled using short reads 
 
 > ## Step 01: Map genome sequencing reads to tomato genome.
