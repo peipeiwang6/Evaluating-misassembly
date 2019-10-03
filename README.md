@@ -82,20 +82,20 @@ To assess the extent to which read coverage impacts the RD determination, reads 
 
 > ## Step 09: Get the features to build the machine learning models
 
-** GC content and densities of genomic features **
+**GC content and densities of genomic features**
 
 - python 09_01_GC_content_and_densities_exclude_N.py genome_file gff_file repeats_gff_file repeats_gff_file_2 dic_file 
 tandem_file proximal_file
 
-** K-mer **
+**K-mer**
 
  - python 09_02_Get_k_mer.py HC/LC/BG_regions genome_file number_of_K 
  
  - python 09_03_parsh_kmer_to_features.py genome_file CNV_file kmer_file number_of_K
  
-** Tandem repeats, or Simple sequence repeat **
+**Tandem repeats, or Simple sequence repeat**
 
- - trf yoursequence.txt 2 7 7 80 10 50 500 -f -d -m
+ - trf yoursequence.txt 2 7 7 80 10 50 500 -f -d -m  # software tandem repeat finder can be found here: [click here](https://tandem.bu.edu/trf/trf.html)
  
  - python 09_04_parse_each_tandem_repeat_as_features.py CNV_file SSR_file genome_file output
 
