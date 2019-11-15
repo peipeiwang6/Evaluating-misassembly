@@ -143,7 +143,10 @@ To evaluate the properties of genes located in HC regions, first the number of e
  
   - python 16_Test_Fisher.py your_file 0/1    ## contributed by Sahra Uygun
  
+> ## Step 17: Align two genome assemblies (MUMmer, Kurtz et al., 2004. Genome Biology)
 
+  - ./nucmer -p <prefix> ref.seq qry.seq
+  - mummerplot -p prefix prefix.delta --png -large -layout
 
 
  
