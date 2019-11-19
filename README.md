@@ -6,7 +6,7 @@ Scripts for our paper: **Wang PP, Meng FR, Moore BM, Shiu SH**. Factors influenc
 
 > mapping reads to tomato genome
 
- - bwa mem -R "@RG\tID:1\tSM:SRR404081\tLB:SRR404081\tPL:SRR404081\tPU:SRR404081" -t 8 Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa  Sly.1.trimmed.fastq Sly.2.trimmed.fastq > 01_SRR404081.sam
+ - bwa mem -R "@RG\tID:1\tSM:SRR404081\tLB:SRR404081\tPL:SRR404081\tPU:SRR404081" -t 8 Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa  Sly.1.trimmed.fastq Sly.2.trimmed.fastq > 01_SRR404081.sam 
 
 > reorder the mapped reads
 
@@ -20,11 +20,15 @@ Scripts for our paper: **Wang PP, Meng FR, Moore BM, Shiu SH**. Factors influenc
 
  - java -jar $PICARD/SortSam.jar INPUT=03_SRR404081_reorder.bam OUTPUT=04_SRR404081_sorted.bam SORT_ORDER=coordinate
 
+> remove PCR duplicates
+
+ - java -jar $EBROOTPICARD/picard.jar MarkDuplicates REMOVE_DUPLICATES=true MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=8000 INPUT=04_SRR404081_sorted.bam OUTPUT=05_SRR404081_sorted_dedup.bam METRICS_FILE=05_SRR404081_sorted_dedup.metrics
+ 
 > ## Step 02: Determine the optimal bin size. Note that bin sizes of 50, 100, 150, 200, 250, 300 bp have been tested
 
 > Determine read depth and regions with variable read coverage using CNVnator (Abyzov et al., 2011) with different bin sizes. Note that in outputs of CNVnator, regions with significantly higher (HC) is referred to as "duplication", while regions with significanly lower (LC) read coverages is "deletion". The remain regions were taken as BG.
 
- - cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -tree 04_SRR404081_sorted.bam -unique
+ - cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -tree 05_SRR404081_sorted_dedup.bam -unique
 
  - cnvnator -genome Solanum_lycopersicum_GCF_000188115.3_SL2.50_genomic.fa -root Sly.root -his bin_size -d genome/
 
