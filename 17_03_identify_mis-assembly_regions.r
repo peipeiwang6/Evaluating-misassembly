@@ -20,6 +20,7 @@ chr_new <- chr_new[order(chr_new)]
 
 ### new corresponding regions not overlapping 
 mis_dup <- c()
+mis_region <- c()
 for(i in 1:length(chr_old)){
 	tem <- subdat1[subdat1[,1]==chr_old[i] & subdat1[,7]=='forward',]
 	tem <- tem[order(tem[,2]),]
@@ -38,6 +39,7 @@ for(i in 1:length(chr_old)){
 					if(nrow(new_01)==0 & nrow(new_02)==0){ ### corresponding regions in new assembly only have one match in old assembly
 						mis_dup <- rbind(mis_dup,c(tem[j,],' '))
 						mis_dup <- rbind(mis_dup,c(tem[j+1,],'mis-assembly'))
+						mis_region <- rbind(mis_region,c(tem[j+1,1],region_01[1],region_02[2],'mis_assembly_tandem_duplicates'))
 						}
 					}
 				}
@@ -65,6 +67,7 @@ for(i in 1:length(chr_old)){
 					if(nrow(new_01)==0 & nrow(new_02)==0){ ### corresponding regions in new assembly only have one match in old assembly
 						mis_dup <- rbind(mis_dup,c(tem[j,],' '))
 						mis_dup <- rbind(mis_dup,c(tem[j+1,],'mis-assembly'))
+						mis_region <- rbind(mis_region,c(tem[j+1,1],region_01[1],region_02[2],'mis_assembly_non-tandem_duplicates'))
 						}
 					}
 				}
@@ -94,12 +97,14 @@ for(i in 1:length(chr_old)){
 							mis <- rbind(mis,c(tem[j,],' '))
 							mis <- rbind(mis,c(tem[j+1,],'mis-assembly'))
 							mis <- rbind(mis,c(tem[j+2,],' '))
+							mis_region <- rbind(mis_region,c(tem[j+1,1],tem[j+1,2],tem[j+1,3],'mis_assembly_non-duplicates'))
 							j = j + 1
 						}
 					if(nrow(new_02)==1 & nrow(old_02)==1 & abs(b1-b0) < abs(b2-b0)) {
 						mis <- rbind(mis,c(tem[j,],' '))
 						mis <- rbind(mis,c(tem[j+1,],' '))
 						mis <- rbind(mis,c(tem[j+2,],'mis-assembly'))
+						mis_region <- rbind(mis_region,c(tem[j+2,1],tem[j+2,2],tem[j+2,3],'mis_assembly_non-duplicates'))
 						j = j + 2
 						}
 					if(nrow(old_01)>1) {
@@ -118,3 +123,4 @@ for(i in 1:length(chr_old)){
 		}
 	}
 write.table(mis,'Mis-assembly_100bp_old_half_new_soft.txt',sep='\t',quote=F,row.names=F,col.names=F)
+write.table(mis_region,'Mis-assembly_regions.txt',sep='\t',quote=F,row.names=F,col.names=F)
