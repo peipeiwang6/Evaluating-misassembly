@@ -151,7 +151,9 @@ To evaluate the properties of genes located in HC regions, first the number of e
 
   - ./nucmer -p <prefix> ref.seq qry.seq
   - mummerplot -p prefix prefix.delta --png -large -layout
-
+  - python 17_01_parse_nucmer_results.py prefix chr_SL2.5 chr_SL4.0  # output: corresponding_between_two_assemblies.txt
+  - Rscript 17_02_draw_alignment.r
+  - Rscript 17_03_identify_mis-assembly_regions.r
 
  
 
