@@ -1,12 +1,13 @@
 overlapping_perc <- function(left1,right1,left2,right2){
 	if(as.numeric(left1-right2)*as.numeric(right1-left2) < 0){
-		overlap = min(abs(left1-right2), abs(right1-left2))
+		overlap = min(abs(left1-right2)+1, abs(right1-left2)+1,abs(left1-right1) + 1,abs(left2-right2) + 1) 
 		return(c(overlap/(abs(left1-right1) + 1),overlap/(abs(left2-right2) + 1),overlap))
 		}
 	else {
 		return(c(0,0,0))
 		}
 }
+
 
 setwd('D:\\Tandem_CNV\\Revision_NAR_GB')
 dat <- read.table('All_chr_corresponding_between_two_assemblies_true_chr_pos.txt',head=F,sep='\t',stringsAsFactor=F)
