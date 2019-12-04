@@ -15,11 +15,6 @@ Same_chr <- function(chr1,chr2,Chr){
 	}
 	
 Residue <- function(x1,x2,y1,y2){
-	b = (x2*y1 - x1*y2)/(x2-x1)
-	return(b)
-	}	
-
-Residue <- function(x1,x2,y1,y2){
 	b = (as.numeric(x2)*as.numeric(y1) - as.numeric(x1)*as.numeric(y2))/(as.numeric(x2)-as.numeric(x1))
 	return(b)
 	}	
