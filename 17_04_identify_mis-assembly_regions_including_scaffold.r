@@ -82,7 +82,7 @@ for(i in 1:nrow(Chr)){
 											as.numeric(subdat2[,5]-region_02[4])*as.numeric(subdat2[,6]-region_02[3])<0 & 
 											(subdat2[,5]!=tem[m,5] | subdat2[,6]!=tem[m,6]) & 
 											(subdat2[,5]!=tem[j,5] | subdat2[,6]!=tem[j,6]),]
-					if(nrow(new_01)==0 & nrow(new_02)==0 & min(tem[j,6],tem[m,6])-max(tem[j,5],tem[m,5]) < 0.5 *abs(region_02[4]-region_02[3])){ ### corresponding regions in new assembly only have one match in old assembly
+					if(nrow(new_02)==0 & min(tem[j,6],tem[m,6])-max(tem[j,5],tem[m,5]) < 0.5 *abs(region_02[4]-region_02[3])){ ### corresponding regions in new assembly only have one match in old assembly
 							### one region is not included in the other region in new assembly
 						mis_dup_same_chr <- rbind(mis_dup_same_chr,c(tem[j,],x1,x2,'mis-assembly_dup_same_chr'))
 						}
@@ -260,7 +260,7 @@ for(i in 1:length(C_old)){
 												as.numeric(subdat3[,5]-region_02[4])*as.numeric(subdat3[,6]-region_02[3])<0 & 
 												(subdat3[,5]!=tem[m,5] | subdat3[,6]!=tem[m,6]) & 
 												(subdat3[,5]!=tem[j,5] | subdat3[,6]!=tem[j,6]),]
-						if(nrow(new_01)==0 & nrow(new_02)==0){ ### corresponding regions in new assembly only have one match in old assembly
+						if(nrow(new_02)==0){ ### corresponding regions in new assembly only have one match in old assembly
 								### one region is not included in the other region in new assembly
 							mis_dup_diff_chr <- rbind(mis_dup_diff_chr,c(tem[j,],tem[m,4],x1,x2,'mis_dup_diff_chr'))
 							}
