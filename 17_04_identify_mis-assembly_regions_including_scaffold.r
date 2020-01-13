@@ -27,6 +27,7 @@ dat <- dat[order(dat[,1],dat[,2],dat[,3],dat[,4],dat[,5]),]
 C_old <- unique(dat[,1])
 NonD <- c()
 Dup <- c()
+No_match <- c()
 for(i in 1:length(C_old)){
 	tem <- dat[dat[,1]==C_old[i],]
 	pos <- c(tem[,2],tem[,3])
@@ -35,16 +36,14 @@ for(i in 1:length(C_old)){
 		left <- pos[j]
 		right <- pos[j+1]
 		subtem <- tem[as.numeric(tem[,3]-left)*as.numeric(tem[,2]-right) < 0,]
-		if(nrow(subtem)>1){
-			Dup <- rbind(Dup,c(C_old[i],left,right,'Duplicate_region'))
-			}
-		else {
-			NonD <- rbind(NonD,c(C_old[i],left,right,'Non_duplicate'))
-			}
+		if(nrow(subtem)>1) Dup <- rbind(Dup,c(C_old[i],left,right,'Duplicate_region'))
+		if(nrow(subtem)==1) NonD <- rbind(NonD,c(C_old[i],left,right,'Non_duplicate'))
+		if(nrow(subtem)==0) No_match <- rbind(No_match,c(C_old[i],left,right,'No_match'))	
 		}
 	}
 write.table(Dup,'Duplication_regions.txt',row.names=F,col.names=F,quote=F,sep='\t')
 write.table(NonD,'Non_duplication_regions.txt',row.names=F,col.names=F,quote=F,sep='\t')
+write.table(No_match,'No_match_regions.txt',row.names=F,col.names=F,quote=F,sep='\t')
 
 Dup <- read.table('Duplication_regions.txt',head=F,sep='\t',stringsAsFactor=F)
 NonD <- read.table('Non_duplication_regions.txt',head=F,sep='\t',stringsAsFactor=F)
@@ -74,10 +73,6 @@ for(i in 1:nrow(Chr)){
 					x2 = min(tem[j,3],tem[m,3])
 					region_01 <- c(x1,x2,min(x1*a1+b1,x2*a1+b1),max(x1*a1+b1,x2*a1+b1))
 					region_02 <- c(x1,x2,min(x1*a2+b2,x2*a2+b2),max(x1*a2+b2,x2*a2+b2))
-					new_01 <- subdat2[subdat2[,4]==tem[j,4] &  subdat2[,1] == tem[j,1] &
-											as.numeric(subdat2[,5]-region_01[4])*as.numeric(subdat2[,6]-region_01[3])<0 & 
-											(subdat2[,5]!=tem[j,5] | subdat2[,6]!=tem[j,6]) & 
-											(subdat2[,5]!=tem[m,5] | subdat2[,6]!=tem[m,6]),]
 					new_02 <- subdat2[subdat2[,4]==tem[m,4] & subdat2[,1] == tem[m,1] &
 											as.numeric(subdat2[,5]-region_02[4])*as.numeric(subdat2[,6]-region_02[3])<0 & 
 											(subdat2[,5]!=tem[m,5] | subdat2[,6]!=tem[m,6]) & 
@@ -128,7 +123,7 @@ non_mis_but_dup_same_chr <- unique(non_mis_but_dup_same_chr)
 write.table(mis_dup_same_chr,'Mis-assembly_dup_same_chr.txt',sep='\t',quote=F,row.names=F,col.names=F)
 write.table(non_mis_but_dup_same_chr,'Non-misassembly_Dup_same_chr.txt',sep='\t',quote=F,row.names=F,col.names=F)
 
-mis_non_dup <- c()  ### not solved yet, have some issue
+mis_non_dup <- c()  
 for(i in 1:length(C_old)){
 	subdup <- NonD[NonD[,1]==C_old[i],]
 	subdat <- dat[dat[,1]==C_old[i],]
@@ -252,10 +247,6 @@ for(i in 1:length(C_old)){
 						x2 = min(tem[j,3],tem[m,3])
 						region_01 <- c(x1,x2,min(x1*a1+b1,x2*a1+b1),max(x1*a1+b1,x2*a1+b1))
 						region_02 <- c(x1,x2,min(x1*a2+b2,x2*a2+b2),max(x1*a2+b2,x2*a2+b2))
-						new_01 <- subdat3[subdat3[,1] == tem[j,1] &
-												as.numeric(subdat3[,5]-region_01[4])*as.numeric(subdat3[,6]-region_01[3])<0 & 
-												(subdat3[,5]!=tem[j,5] | subdat3[,6]!=tem[j,6]) & 
-												(subdat3[,5]!=tem[m,5] | subdat3[,6]!=tem[m,6]),]
 						new_02 <- subdat3[subdat3[,4]==tem[m,4] &
 												as.numeric(subdat3[,5]-region_02[4])*as.numeric(subdat3[,6]-region_02[3])<0 & 
 												(subdat3[,5]!=tem[m,5] | subdat3[,6]!=tem[m,6]) & 
@@ -291,3 +282,4 @@ dup_diff_chr <- unique(dup_diff_chr)
 mis_dup_diff_chr <- unique(mis_dup_diff_chr)
 write.table(dup_diff_chr,'Dup_in_diff_chr.txt',row.names=F,col.names=F,quote=F,sep='\t')	
 write.table(mis_dup_diff_chr,'Mis_assembly_Dup_in_diff_chr.txt',row.names=F,col.names=F,quote=F,sep='\t')	
+
