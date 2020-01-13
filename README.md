@@ -156,8 +156,9 @@ To evaluate the properties of genes located in HC regions, first the number of e
   - Rscript 17_04_identify_mis-assembly_regions_including_scaffold.r
   - Rscript 17_05_merge_regions.r ### before this step, cat files with 
           'mis-assembly_dup_same_chr','dup_same_chr','mis_dup_diff_chr','dup_diff_chr','mis_non_dup','Non_duplicate' results together
-  
-
+  - Rscript 17_06_combine_CNV_region_and_aligned_regions.r
+> ## Step 18: compare HC/LC/BG calls between two assemblies
+  - python 18_compare_HC_BG_LC_calls_in_two_assemblies.py
  
 
 
