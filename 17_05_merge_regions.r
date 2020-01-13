@@ -1,30 +1,30 @@
-Link_subtype <- function(dat,List){
-	dat2 <- c()
-	for(mis in List){
-		tem <- dat[dat[,4]==mis,]
-		tem <- unique(tem)
-		tem <- tem[order(tem[,1],tem[,2]),]
-		i <- 1
-		while(i < nrow(tem)){
-			j <- i + 1
-			left <- as.numeric(tem[i,2])
-			right <- as.numeric(tem[i,3])
-			while(j < nrow(tem) & tem[i,1]==tem[j,1] & right-as.numeric(tem[j,2])>=0){
-				right <- max(right,as.numeric(tem[j,3]))
-				j <- j + 1
+Link <- function(dat,List){
+	dat3 <- c()
+	chr <- unique(dat[,1])
+	for(i in 1:length(chr)){
+		dat2 <- dat[dat[,1]==chr[i],]
+		pos <- c(dat2[,2],dat2[,3])
+		pos <- unique(pos[order(pos)])
+		for(j in 1:(length(pos)-1)){
+			left <- pos[j]
+			right <- pos[j+1]
+			tem <- dat2[as.numeric(dat2[,3]-left) * as.numeric(dat2[,2]-right)<0,]
+			if(nrow(tem)==1){
+				dat3 <- rbind(dat3,c(tem[1,1],left,right,tem[1,4]))
 				}
-			if(j == nrow(tem)){
-				if(tem[i,1]==tem[j,1] & right-as.numeric(tem[j,2])>0){
-					right <- max(right,as.numeric(tem[j,3]))
+			if(nrow(tem)>1){
+				Rank <- c()
+				for(k in 1:nrow(tem)){
+					Rank <- rbind(Rank,c(tem[k,4],which(List==as.character(tem[k,4]))))
 					}
+				dat3 <- rbind(dat3,c(tem[1,1],left,right,Rank[as.numeric(Rank[,2])==min(as.numeric(Rank[,2])),1]))
 				}
-			dat2 <- rbind(dat2,c(tem[i,1:2],right,tem[i,4]))
-			i <- j
 			}
 		}
-	dat2 <- cbind(dat2,as.numeric(dat2[,3])-as.numeric(dat2[,2])+1)
-	return(unique(dat2))
+	dat3 <- unique(dat3)
+	return(dat3)
 	}
+
 	
 All <- read.table('All_region_merged_20191205_03.txt',head=F,sep='\t',stringsAsFactor=F)
 All[All[,2]<1,2] <- 1
