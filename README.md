@@ -154,6 +154,9 @@ To evaluate the properties of genes located in HC regions, first the number of e
   - python 17_02_parse_nucmer_results.py prefix chr_SL2.5 chr_SL4.0  # output: corresponding_between_two_assemblies.txt
   - Rscript 17_03_draw_alignment.r
   - Rscript 17_04_identify_mis-assembly_regions_including_scaffold.r
+  - Rscript 17_05_merge_regions.r ### before this step, cat files with 
+          'mis-assembly_dup_same_chr','dup_same_chr','mis_dup_diff_chr','dup_diff_chr','mis_non_dup','Non_duplicate' results together
+  
 
  
 
